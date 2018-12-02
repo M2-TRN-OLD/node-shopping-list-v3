@@ -24,6 +24,10 @@ Recipes.create(
   'boiled white rice', ['1 cup white rice', '2 cups water', 'pinch of salt']);
 Recipes.create(
   'milkshake', ['2 tbsp cocoa', '2 cups vanilla ice cream', '1 cup milk']);
+Recipes.create(
+    'shrimp scampi', ['1 lb thin spagetti', 'juice of 2 lemons', '1 lb shrimp']);
+Recipes.create(
+    'chix pot pie', ['1 pie crust', 'chix of 1 roasted chix', 'chix broth']);
 
 // when the root of this router is called with GET, return
 // all current ShoppingList items
@@ -76,6 +80,12 @@ app.post('/recipes', jsonParser, (req, res) => {
 app.get('/recipes', (req, res) => {
   res.json(Recipes.get());
 })
+
+app.delete('/recipes/:id', (req, res) => {
+  Recipes.delete(req.params.id);
+  console.log(`Deleted recipe\`${req.params.id}\``);
+  res.status(204).end();
+});
 
 app.listen(process.env.PORT || 8080, () => {
   console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
